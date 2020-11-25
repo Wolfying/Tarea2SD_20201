@@ -1,0 +1,41 @@
+syntax = "proto3";
+package datanode;
+option go_package = "Datanode/datanode";
+
+service DataNodeHandler {
+    rpc UploadFile (stream chunk) returns (stream response) {}
+    rpc DownloadFile (stream fileInfo) returns (stream chunkResponse) {}
+}
+
+enum StatusCode {
+    Success = 0;
+    NotFound = 1;
+    InternalError = 2;
+}
+
+message response{
+    string message = 1;
+    StatusCode status = 2;
+}
+
+message chunk{
+    bytes content = 1;
+    string chunkName = 2;
+    string fileName = 3;
+    int32 chunkPos = 4;
+}
+
+message chunkResponse{
+    bytes content = 1;
+    string chunkName = 2;
+    string fileName = 3;
+    int32 chunkPos = 4;
+    StatusCode status = 5;
+    string message = 6;
+}
+
+message fileInfo{
+    string fileName = 1;
+    int32 chunkPos = 2;
+}
+

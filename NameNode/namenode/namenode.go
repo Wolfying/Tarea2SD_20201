@@ -1,0 +1,5 @@
+package namenode
+
+func main() {
+
+}
