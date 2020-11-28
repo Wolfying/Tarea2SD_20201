@@ -120,7 +120,7 @@ func Combiner(name string, totalPartsNum uint64) {
 }
 
 // Splitter ...
-func Splitter(name string) {
+func Splitter(name string) uint64 {
 	fileToBeChunked := name // change here!
 
 	file, err := os.Open(fileToBeChunked)
@@ -165,5 +165,6 @@ func Splitter(name string) {
 
 		fmt.Println("Dividido a : ", fileName)
 	}
+	return totalPartsNum
 
 }

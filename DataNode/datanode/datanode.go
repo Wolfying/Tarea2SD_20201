@@ -2,6 +2,7 @@ package datanode
 
 import (
 	"io"
+	"io/ioutil"
 	"log"
 )
 
@@ -21,31 +22,37 @@ func (dns *ServerDataNode) UploadFile(incomestream DataNodeHandler_UploadFileSer
 		if err != nil {
 			return err
 		}
-		// mensaje := in.Content
-		// nameFile := in.ChunkName
 
-		// if _, err12 := os.Stat("/libro"); os.IsNotExist(err12) {
-		// 	errFolder := os.Mkdir("libro", 0755)
-		// 	fmt.Printf("El andres se la come")
+		nombreParte := in.ChunkName
+		fileName := in.FileName
+		_ = fileName
+		file := in.Content
+
+		// if _, err12 := os.Stat("/libros"); os.IsNotExist(err12) {
+		// 	errFolder := os.Mkdir("libros", 0755)
+		// 	fmt.Printf("Carpeta Creada")
 		// 	if errFolder != nil {
 		// 		log.Fatal(err)
 		// 	}
 		// }
+		filePath := "libros/" + nombreParte
+		filePart := ioutil.WriteFile(filePath, file, 0644)
 
-		// Andres := ioutil.WriteFile("libro/"+nameFile+"andresql", mensaje, 0644)
-		// if Andres != nil {
-		// 	log.Fatal(Andres)
-		// }
+		if filePart != nil {
+			log.Fatal(filePart)
+		}
+
 		/*
-			Hago algo con lo que recibo con in
+			Preparación respuesta a cliente.
 		*/
-		log.Printf("%s", in.ChunkName)
+		log.Printf("Archivo creado en %s", filePath)
 
 		//Se envia la respuesta
 		if err := incomestream.Send(&Response{
 			Message: in.ChunkName,
 			Status:  StatusCode_Success}); err != nil {
-			return err
+			return incomestream.Send(&Response{Message: err.Error(),
+				Status: StatusCode_InternalError})
 		}
 
 	}

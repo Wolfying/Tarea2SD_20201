@@ -3,6 +3,7 @@ package datanode;
 option go_package = "Datanode/datanode";
 
 service DataNodeHandler {
+    rpc UploadBook (stream petition) returns (stream response) {}
     rpc UploadFile (stream chunk) returns (stream response) {}
     rpc DownloadFile (stream fileInfo) returns (stream chunkResponse) {}
 }
@@ -22,20 +23,20 @@ message chunk{
     bytes content = 1;
     string chunkName = 2;
     string fileName = 3;
-    int32 chunkPos = 4;
+    uint64 chunkPos = 4;
 }
 
 message chunkResponse{
     bytes content = 1;
     string chunkName = 2;
     string fileName = 3;
-    int32 chunkPos = 4;
+    uint64 chunkPos = 4;
     StatusCode status = 5;
     string message = 6;
 }
 
 message fileInfo{
     string fileName = 1;
-    int32 chunkPos = 2;
+    uint64 chunkPos = 2;
 }
 

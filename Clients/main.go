@@ -1,10 +1,17 @@
 package main
 
 import (
+	splitter "Tarea2/Clients/Splitter"
 	"Tarea2/DataNode/datanode"
+	"bufio"
 	"context"
+	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
+	"os"
+	"strconv"
+	"strings"
 	"time"
 
 	"google.golang.org/grpc"
@@ -50,30 +57,41 @@ func main() {
 		}
 	}()
 
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Printf("Ingrese nombre del archivo: ")
+	file, _ := reader.ReadString('\n')
+	file = strings.TrimSuffix(file, "\n")
+	file = strings.TrimSuffix(file, "\r")
+
+	cantidadPartes := splitter.Splitter(file)
+
 	var mensaje datanode.Chunk
+	var i uint64
+	for i = 0; i < cantidadPartes; i++ {
+		nombreParte := file + "_" + strconv.FormatUint(i, 10)
+		chunkBytes, errBytes := ioutil.ReadFile(nombreParte)
 
-	// for i := 0; i < len(partes); i++ {
-	// chunkBytes, errBytes := ioutil.ReadFile(partes[i])
+		if errBytes != nil {
+			fmt.Print(errBytes)
 
-	// if errBytes != nil {
-	// 	fmt.Print(errBytes)
-	// }
+		}
 
-	mensaje = datanode.Chunk{
-		Content:   nil,
-		ChunkName: "Hola putito",
-		FileName:  "hola puto",
-		ChunkPos:  1,
+		mensaje = datanode.Chunk{
+			Content:   chunkBytes,
+			ChunkName: nombreParte,
+			FileName:  file,
+			ChunkPos:  i,
+		}
+
+		// fmt.Printf(partes[i])
+
+		if err := response.Send(&mensaje); err != nil {
+			log.Fatalf("Failed to send a note: %v", err)
+		}
+
+		time.Sleep(1 * time.Second)
+		// }
 	}
-
-	// fmt.Printf(partes[i])
-
-	if err := response.Send(&mensaje); err != nil {
-		log.Fatalf("Failed to send a note: %v", err)
-	}
-
-	time.Sleep(1 * time.Second)
-	// }
 
 	response.CloseSend()
 	<-waitc
