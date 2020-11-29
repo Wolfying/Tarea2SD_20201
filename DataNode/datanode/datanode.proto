@@ -6,12 +6,24 @@ service DataNodeHandler {
     rpc UploadBook (stream petition) returns (stream response) {}
     rpc UploadFile (stream chunk) returns (stream response) {}
     rpc DownloadFile (stream fileInfo) returns (stream chunkResponse) {}
+    rpc Ping (stream ping) returns (stream ping) {}
 }
+
+
 
 enum StatusCode {
     Success = 0;
     NotFound = 1;
     InternalError = 2;
+}
+
+message ping{
+    bool canReceive = 1;
+    string message = 2;
+}
+
+message petition{
+
 }
 
 message response{

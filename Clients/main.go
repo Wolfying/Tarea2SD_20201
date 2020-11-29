@@ -22,6 +22,13 @@ func main() {
 	// splitter.Splitter("cosa.pdf")
 	// splitter.Combiner("cosa.pdf", 3)
 
+	// name, err := os.Hostname()
+	// if err != nil {
+	// 	panic(err)
+	// }
+
+	// fmt.Println("hostname:", name)
+
 	var conn *grpc.ClientConn
 	conn, err := grpc.Dial(":9444", grpc.WithInsecure())
 

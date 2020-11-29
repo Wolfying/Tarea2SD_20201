@@ -1,5 +1,0 @@
-package namenode
-
-func main() {
-
-}

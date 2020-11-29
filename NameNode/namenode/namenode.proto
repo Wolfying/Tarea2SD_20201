@@ -7,15 +7,21 @@ syntax = "proto3";
 
 package namenode;
 
-service clientHandler {
-    rpc Escuchar (orden) returns (response) {}
+service NameNodeHandler {
+    rpc ManejarPropuesta (stream Propuesta) returns (stream Propuesta) {}
 }
 
-message response{
-    
+enum PropuestaStatus {
+    Rechazado = 0;
+    Aprobado = 1;
 }
 
-message orden{
-    
+message Propuesta{
+    repeated int32 datanode1 = 1;
+    repeated int32 datanode2 = 2;
+    repeated int32 datanode3 = 3;
+    int32 cantidadPartes = 4;
+    PropuestaStatus status = 5;
 }
+
 
