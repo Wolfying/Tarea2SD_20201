@@ -35,7 +35,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 		if err != nil {
 			return err
 		}
-
+		log.Printf("Se recibe una propuesta del datanode")
 		nodo1 := PingDataNode(snn.nodos[0])
 		nodo2 := PingDataNode(snn.nodos[1])
 		nodo3 := PingDataNode(snn.nodos[2])
@@ -48,6 +48,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 		var mensaje *namenode.Propuesta
 		if nodo1+nodo2+nodo3 == 3 {
 			mensaje = in
+			log.Printf("Propuesta aprobada")
 			if err := incomestream.Send(mensaje); err != nil {
 				return err
 			}
@@ -76,6 +77,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				CantidadPartes: cantidad,
 				Status:         namenode.PropuestaStatus_Rechazado,
 				NombreLibro:    nombreLibro}
+			log.Printf("Propuesta Rechazada")
 			if err := incomestream.Send(mensaje); err != nil {
 				return err
 			}
@@ -103,6 +105,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				CantidadPartes: cantidad,
 				Status:         namenode.PropuestaStatus_Rechazado,
 				NombreLibro:    nombreLibro}
+			log.Printf("Propuesta Rechazada")
 			if err := incomestream.Send(mensaje); err != nil {
 				return err
 			}
@@ -117,12 +120,14 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				CantidadPartes: cantidad,
 				Status:         namenode.PropuestaStatus_Rechazado,
 				NombreLibro:    nombreLibro}
+			log.Printf("Propuesta Rechazada")
 			if err := incomestream.Send(mensaje); err != nil {
 				return err
 			}
 		}
 		snn.loglog.Lock()
 		savePropuesta(*mensaje)
+		log.Printf("Informacion del libro subido guardada")
 		snn.loglog.Unlock()
 	}
 
@@ -133,15 +138,15 @@ func savePropuesta(propuesta namenode.Propuesta) bool {
 	infoLibro := []string{}
 	infoLibro = append(infoLibro, propuesta.NombreLibro+" Cantidad_Partes "+fmt.Sprint(propuesta.CantidadPartes)+"\n")
 	for _, filenumber := range propuesta.Datanode1 {
-		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + ":9444" + "\n"
+		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + "dist141" + "\n"
 		infoLibro = append(infoLibro, linea)
 	}
 	for _, filenumber := range propuesta.Datanode2 {
-		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + ":9445" + "\n"
+		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + "dist142" + "\n"
 		infoLibro = append(infoLibro, linea)
 	}
 	for _, filenumber := range propuesta.Datanode3 {
-		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + ":9446" + "\n"
+		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + "dist143" + "\n"
 		infoLibro = append(infoLibro, linea)
 	}
 	archivo := "log.txt"
@@ -202,7 +207,7 @@ func PingDataNode(maquina string) int {
 			}
 
 			if err != nil {
-				log.Fatalf("Error al recibir un mensaje: %v", err)
+				log.Fatalf("Error al realizar un ping al datanode %s : %v", maquina, err)
 			}
 
 			if in.CanReceive == false {

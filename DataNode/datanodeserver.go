@@ -169,7 +169,7 @@ func (sdn *ServerDataNode) UploadFile(incomestream datanode.DataNodeHandler_Uplo
 			}
 
 			if err != nil {
-				log.Fatalf("Error al recibir un mensaje: %v", err)
+				log.Fatalf("Error al recibir respuesta de la propuesta %v", err)
 			}
 			log.Printf("El server retorna el siguiente mensaje: %v", in.Status)
 			waitc <- in
@@ -256,7 +256,7 @@ func sendChunkList(chunks []chunkFilesList, datanodeip string) *datanode.Respons
 			}
 
 			if err != nil {
-				log.Fatalf("Error al recibir un mensaje: %v", err)
+				log.Fatalf("Error al recibir la respuesta del estado del archivo: %v", err)
 			}
 			log.Printf("El server retorna el siguiente mensaje: %v", in.Message)
 		}
