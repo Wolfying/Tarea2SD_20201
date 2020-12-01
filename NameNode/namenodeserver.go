@@ -30,7 +30,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 	for {
 		in, err := incomestream.Recv()
 		if err == io.EOF {
-			break
+			return nil
 		}
 		if err != nil {
 			return err
@@ -130,8 +130,6 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 		log.Printf("Informacion del libro subido guardada")
 		snn.loglog.Unlock()
 	}
-
-	return nil
 }
 
 func savePropuesta(propuesta namenode.Propuesta) bool {
