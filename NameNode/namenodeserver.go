@@ -3,21 +3,26 @@ package main
 import (
 	"Tarea2/DataNode/datanode"
 	"Tarea2/NameNode/namenode"
+	"bufio"
 	"context"
+	"fmt"
 	"io"
 	"log"
 	"math"
 	"net"
+	"os"
 	"time"
 
 	"google.golang.org/grpc"
 )
 
+// ServerNameNode ...
 type ServerNameNode struct {
 	integer int32
 	nodos   []string
 }
 
+// ManejarPropuesta ...
 func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandler_ManejarPropuestaServer) error {
 
 	for {
@@ -33,12 +38,15 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 		nodo2 := PingDataNode(snn.nodos[1])
 		nodo3 := PingDataNode(snn.nodos[2])
 		cantidad := in.CantidadPartes
+		nombreLibro := in.NombreLibro
 
 		var propNodo1 []int32
 		var propNodo2 []int32
 		var propNodo3 []int32
+		var mensaje *namenode.Propuesta
 		if nodo1+nodo2+nodo3 == 3 {
-			if err := incomestream.Send(in); err != nil {
+			mensaje = in
+			if err := incomestream.Send(mensaje); err != nil {
 				return err
 			}
 		} else if nodo1+nodo2+nodo3 == 2 {
@@ -59,12 +67,14 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				propNodo3 = []int32{}
 
 			}
-			if err := incomestream.Send(&namenode.Propuesta{
+			mensaje = &namenode.Propuesta{
 				Datanode1:      propNodo1,
 				Datanode2:      propNodo2,
 				Datanode3:      propNodo3,
 				CantidadPartes: cantidad,
-				Status:         namenode.PropuestaStatus_Rechazado}); err != nil {
+				Status:         namenode.PropuestaStatus_Rechazado,
+				NombreLibro:    nombreLibro}
+			if err := incomestream.Send(mensaje); err != nil {
 				return err
 			}
 		} else if nodo1+nodo2+nodo3 == 1 {
@@ -84,31 +94,70 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				propNodo3 = makeRange(0, int32(cantidad))
 
 			}
-			if err := incomestream.Send(&namenode.Propuesta{
+			mensaje = &namenode.Propuesta{
 				Datanode1:      propNodo1,
 				Datanode2:      propNodo2,
 				Datanode3:      propNodo3,
 				CantidadPartes: cantidad,
-				Status:         namenode.PropuestaStatus_Rechazado}); err != nil {
+				Status:         namenode.PropuestaStatus_Rechazado,
+				NombreLibro:    nombreLibro}
+			if err := incomestream.Send(mensaje); err != nil {
 				return err
 			}
 		} else {
 			propNodo2 = []int32{}
 			propNodo1 = []int32{}
 			propNodo3 = []int32{}
-
-			if err := incomestream.Send(&namenode.Propuesta{
+			mensaje = &namenode.Propuesta{
 				Datanode1:      propNodo1,
 				Datanode2:      propNodo2,
 				Datanode3:      propNodo3,
 				CantidadPartes: cantidad,
-				Status:         namenode.PropuestaStatus_Rechazado}); err != nil {
+				Status:         namenode.PropuestaStatus_Rechazado,
+				NombreLibro:    nombreLibro}
+			if err := incomestream.Send(mensaje); err != nil {
 				return err
 			}
 		}
+
+		savePropuesta(*mensaje)
 	}
 
 	return nil
+}
+
+func savePropuesta(propuesta namenode.Propuesta) bool {
+	infoLibro := []string{}
+	infoLibro = append(infoLibro, propuesta.NombreLibro+" Cantidad_Partes "+fmt.Sprint(propuesta.CantidadPartes)+"\n")
+	for _, filenumber := range propuesta.Datanode1 {
+		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + ":9444" + "\n"
+		infoLibro = append(infoLibro, linea)
+	}
+	for _, filenumber := range propuesta.Datanode2 {
+		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + ":9445" + "\n"
+		infoLibro = append(infoLibro, linea)
+	}
+	for _, filenumber := range propuesta.Datanode3 {
+		linea := propuesta.NombreLibro + "_parte_" + fmt.Sprintf("%d", filenumber) + " " + ":9446" + "\n"
+		infoLibro = append(infoLibro, linea)
+	}
+	archivo := "log.txt"
+	file, err := os.OpenFile(archivo, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		log.Fatalf("Error creando el archivo: %s", err)
+		return false
+	}
+
+	datawriter := bufio.NewWriter(file)
+
+	for _, data := range infoLibro {
+		_, _ = datawriter.WriteString(data + "\n")
+	}
+
+	datawriter.Flush()
+	file.Close()
+
+	return true
 }
 
 func makeRange(min, max int32) []int32 {
@@ -119,6 +168,7 @@ func makeRange(min, max int32) []int32 {
 	return a
 }
 
+// PingDataNode ...
 func PingDataNode(maquina string) int {
 	var conn *grpc.ClientConn
 	conn, err := grpc.Dial(maquina, grpc.WithInsecure())

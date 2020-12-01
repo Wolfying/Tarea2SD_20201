@@ -1,11 +1,6 @@
 syntax = "proto3";
-
-// option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
-// option java_multiple_files = true;
-// option java_package = "io.grpc.examples.helloworld";
-// option java_outer_classname = "HelloWorldProto";
-
 package namenode;
+option go_package = "NameNode/namenode";
 
 service NameNodeHandler {
     rpc ManejarPropuesta (stream Propuesta) returns (stream Propuesta) {}
@@ -22,6 +17,7 @@ message Propuesta{
     repeated int32 datanode3 = 3;
     int32 cantidadPartes = 4;
     PropuestaStatus status = 5;
+    string nombreLibro = 6;
 }
 
 

@@ -10,3 +10,5 @@ Integrantes:
 Casos nodo no disponible:
     -Para todas las maquinas, existe un 10% de probabilidad de no estar disponible
     -Nodo no alcanzable
+
+La carpeta "libros" debe ser creada o está ya creada a la hora de ejecutarse el proceso.
