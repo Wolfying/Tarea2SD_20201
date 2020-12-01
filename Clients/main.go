@@ -40,7 +40,7 @@ func main() {
 
 	link := datanode.NewDataNodeHandlerClient(conn)
 
-	ctx, _ := context.WithTimeout(context.Background(), 20*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 100*time.Second)
 	response, err := link.UploadFile(ctx)
 
 	if err != nil {
