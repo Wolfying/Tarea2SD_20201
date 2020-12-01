@@ -239,7 +239,7 @@ func sendChunkList(chunks []chunkFilesList, datanodeip string) *datanode.Respons
 	link := datanode.NewDataNodeHandlerClient(conn)
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	response, err := link.UploadFile(ctx)
+	response, err := link.UploadBook(ctx)
 
 	if err != nil {
 		log.Printf("Conexion fallida: %s", err)
