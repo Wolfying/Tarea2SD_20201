@@ -8,6 +8,7 @@
 *.pdf.zip
 *.zip
 *.pdf_*
+*.sum
 
 # Test binary, built with `go test -c`
 *.test

@@ -325,7 +325,7 @@ func main() {
 	grpcServer := grpc.NewServer()
 
 	datanode.RegisterDataNodeHandlerServer(grpcServer, &server)
-
+	fmt.Printf("Server Iniciado en el puerto %s", puerto)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve gRPC server over port %s: %v", puerto, err)
 	}
