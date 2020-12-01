@@ -279,7 +279,7 @@ func sendChunkList(chunks []chunkFilesList, datanodeip string) *datanode.Respons
 			log.Fatalf("Failed to send a note: %v", err)
 		}
 	}
-
+	<-waitc
 	return nil
 }
 
