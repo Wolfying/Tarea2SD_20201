@@ -11,6 +11,7 @@ import (
 	"math"
 	"net"
 	"os"
+	"sync"
 	"time"
 
 	"google.golang.org/grpc"
@@ -20,6 +21,7 @@ import (
 type ServerNameNode struct {
 	integer int32
 	nodos   []string
+	loglog  sync.Mutex
 }
 
 // ManejarPropuesta ...
@@ -119,8 +121,9 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				return err
 			}
 		}
-
+		snn.loglog.Lock()
 		savePropuesta(*mensaje)
+		snn.loglog.Unlock()
 	}
 
 	return nil
@@ -230,8 +233,8 @@ func PingDataNode(maquina string) int {
 
 func main() {
 	server := ServerNameNode{}
-	puerto := ":9443"
-	server.nodos = []string{":9444", ":9445", ":9446"}
+	puerto := ":8080"
+	server.nodos = []string{"dist141:8080", "dist142:8080", "dist143:8080"}
 	lis, err := net.Listen("tcp", puerto)
 	if err != nil {
 		log.Fatalf("Failed to listen on port %s: %v", puerto, err)

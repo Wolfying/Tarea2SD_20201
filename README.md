@@ -12,3 +12,8 @@ Casos nodo no disponible:
     -Nodo no alcanzable
 
 La carpeta "libros" debe ser creada o está ya creada a la hora de ejecutarse el proceso.
+
+dist141: datanode1
+dist142: datanode2
+dist143: datanode3
+dist144: namenode

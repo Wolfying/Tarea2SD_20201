@@ -141,7 +141,7 @@ func (sdn *ServerDataNode) UploadFile(incomestream datanode.DataNodeHandler_Uplo
 	propuesta := GenerarPropuesta(cantidadpartes, fileName)
 
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":9443", grpc.WithInsecure())
+	conn, err := grpc.Dial("dist144:8080", grpc.WithInsecure())
 
 	if err != nil {
 		log.Fatalf("Conexion fallida: %s", err)
@@ -202,13 +202,13 @@ func (sdn *ServerDataNode) UploadFile(incomestream datanode.DataNodeHandler_Uplo
 		// mandar archivos a datanode 2
 		chunkstosend = append(chunkstosend, chunkFiles[filenumber])
 	}
-	sendChunkList(chunkstosend, ":9445")
+	sendChunkList(chunkstosend, "dist142:8080")
 	chunkstosend = []chunkFilesList{}
 	for _, filenumber := range datanode3 {
 		// mandar archivos a datanode 2
 		chunkstosend = append(chunkstosend, chunkFiles[filenumber])
 	}
-	sendChunkList(chunkstosend, ":9446")
+	sendChunkList(chunkstosend, "dist143:8080")
 	//
 
 	// _ = propuestaNueva
@@ -317,7 +317,7 @@ func (sdn *ServerDataNode) DownloadFile(incomestream datanode.DataNodeHandler_Do
 func main() {
 
 	server := ServerDataNode{}
-	puerto := ":9444"
+	puerto := ":8080"
 	lis, err := net.Listen("tcp", puerto)
 	if err != nil {
 		log.Fatalf("Failed to listen on port %s: %v", puerto, err)

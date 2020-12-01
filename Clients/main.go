@@ -30,7 +30,7 @@ func main() {
 	// fmt.Println("hostname:", name)
 
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":9444", grpc.WithInsecure())
+	conn, err := grpc.Dial("dist141:8080", grpc.WithInsecure())
 
 	if err != nil {
 		log.Fatalf("Conexion fallida: %s", err)
