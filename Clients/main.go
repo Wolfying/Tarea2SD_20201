@@ -40,11 +40,11 @@ func main() {
 
 	link := datanode.NewDataNodeHandlerClient(conn)
 
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, _ := context.WithTimeout(context.Background(), 20*time.Second)
 	response, err := link.UploadFile(ctx)
 
 	if err != nil {
-		log.Printf("Conexion fallida: %s", err)
+		log.Printf("Conexion fallidam al conectarse al datanode para mandar archivo: %s", err)
 	}
 
 	waitc := make(chan struct{})
