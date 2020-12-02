@@ -50,6 +50,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 			mensaje = in
 			log.Printf("Propuesta aprobada")
 			if err := incomestream.Send(mensaje); err != nil {
+				log.Printf("Error en propuesta  %s", err)
 				return err
 			}
 		} else if nodo1+nodo2+nodo3 == 2 {
@@ -79,6 +80,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				NombreLibro:    nombreLibro}
 			log.Printf("Propuesta Rechazada")
 			if err := incomestream.Send(mensaje); err != nil {
+				log.Printf("Error en propuesta  %s", err)
 				return err
 			}
 		} else if nodo1+nodo2+nodo3 == 1 {
@@ -107,6 +109,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				NombreLibro:    nombreLibro}
 			log.Printf("Propuesta Rechazada")
 			if err := incomestream.Send(mensaje); err != nil {
+				log.Printf("Error en propuesta  %s", err)
 				return err
 			}
 		} else {
@@ -122,6 +125,7 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 				NombreLibro:    nombreLibro}
 			log.Printf("Propuesta Rechazada")
 			if err := incomestream.Send(mensaje); err != nil {
+				log.Printf("Error en propuesta  %s", err)
 				return err
 			}
 		}
