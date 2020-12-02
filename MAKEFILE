@@ -9,7 +9,6 @@ compileNamenode:
 #··················································································································
 #················································Data Node·························································
 runDatanode: 
-#  rm -rf libro
  protoc -I DataNode/datanode DataNode/datanode/datanode.proto --go_out=plugins=grpc:./
  go run DataNode/datanodeserver.go
 
@@ -34,6 +33,5 @@ rc:
 
 rd:
  git pull
- rm -rf libro
  protoc -I DataNode/datanode DataNode/datanode/datanode.proto --go_out=plugins=grpc:./
  go run DataNode/datanodeserver.go
