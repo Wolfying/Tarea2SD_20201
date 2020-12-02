@@ -178,7 +178,7 @@ func (sdn *ServerDataNode) UploadFile(incomestream datanode.DataNodeHandler_Uplo
 	if err := response.Send(propuesta); err != nil {
 		log.Fatalf("Failed to send a note: %v", err)
 	}
-
+	response.CloseSend()
 	propuestaNueva := <-waitc
 
 	datanode1 := propuestaNueva.Datanode1 //datanode actual
@@ -278,6 +278,7 @@ func sendChunkList(chunks []chunkFilesList, datanodeip string) *datanode.Respons
 			log.Fatalf("Failed to send a note: %v", err)
 		}
 	}
+	response.CloseSend()
 	<-waitc
 	return nil
 }
