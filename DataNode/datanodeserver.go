@@ -11,7 +11,6 @@ import (
 	"math"
 	"math/rand"
 	"net"
-	"os"
 	"time"
 
 	"google.golang.org/grpc"
@@ -69,13 +68,13 @@ func (sdn *ServerDataNode) UploadBook(incomestream datanode.DataNodeHandler_Uplo
 		nombreParte := in.ChunkName
 		file := in.Content
 
-		if _, err12 := os.Stat("/libros"); os.IsNotExist(err12) {
-			errFolder := os.Mkdir("libros", 0755)
-			fmt.Printf("Carpeta Creada")
-			if errFolder != nil {
-				log.Fatal(err)
-			}
-		}
+		// if _, err12 := os.Stat("/libros"); os.IsNotExist(err12) {
+		// 	errFolder := os.Mkdir("libros", 0755)
+		// 	fmt.Printf("Carpeta Creada")
+		// 	if errFolder != nil {
+		// 		log.Fatal(err)
+		// 	}
+		// }
 		filePath := "libros/" + nombreParte
 		filePart := ioutil.WriteFile(filePath, file, 0644)
 
@@ -83,7 +82,7 @@ func (sdn *ServerDataNode) UploadBook(incomestream datanode.DataNodeHandler_Uplo
 			log.Fatal(filePart)
 		}
 
-		log.Printf("Archivo %s recibido", nombreParte)
+		log.Printf("Archivo %s recibido \n", nombreParte)
 	}
 	/*
 		Preparación respuesta a cliente.
@@ -325,7 +324,7 @@ func main() {
 	grpcServer := grpc.NewServer()
 
 	datanode.RegisterDataNodeHandlerServer(grpcServer, &server)
-	fmt.Printf("Server Iniciado en el puerto %s", puerto)
+	fmt.Printf("Server Iniciado en el puerto %s \n", puerto)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve gRPC server over port %s: %v", puerto, err)
 	}
