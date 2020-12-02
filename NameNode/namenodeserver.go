@@ -30,9 +30,11 @@ func (snn *ServerNameNode) ManejarPropuesta(incomestream namenode.NameNodeHandle
 	for {
 		in, err := incomestream.Recv()
 		if err == io.EOF {
+			log.Printf("imprimo algo antes de return nill")
 			return nil
 		}
 		if err != nil {
+			log.Printf("imprimo algo antes de return err")
 			return err
 		}
 		log.Printf("Se recibe una propuesta del datanode")
