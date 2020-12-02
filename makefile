@@ -1,5 +1,5 @@
 #················································Name Node·························································
-runNamenode: 
+runNamenode:
 	rm -f log.txt
 	protoc -I NameNode/namenode NameNode/namenode/namenode.proto --go_out=plugins=grpc:./
 	go run NameNode/namenodeserver.go
@@ -8,7 +8,7 @@ compileNamenode:
 	protoc -I NameNode/namenode NameNode/namenode/namenode.proto --go_out=plugins=grpc:./
 #··················································································································
 #················································Data Node·························································
-runDatanode: 
+runDatanode:
 	protoc -I DataNode/datanode DataNode/datanode/datanode.proto --go_out=plugins=grpc:./
 	go run DataNode/datanodeserver.go
 
@@ -17,8 +17,8 @@ compileDatanode:
  
 #··················································································································
 #················································Cliente···························································
-runCliente: 
- 	go run Cliente/main.go
+runCliente:
+	go run Cliente/main.go
 #··················································································································
 
 rn:
