@@ -29,7 +29,7 @@ rn:
 
 rc:
 	git pull
-	cd Clients
+	cd Clients/
 	go run main.go
 
 rd:
