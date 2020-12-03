@@ -73,8 +73,9 @@ func (snn *ServerNameNode) SolicitarLibros(incomestream namenode.NameNodeHandler
 			splitline := strings.Split(lineapeqe, " ")
 			nodo := splitline[1]
 			nombreparte := strings.Split(splitline[0], "_")
-			fmt.Printf("nombreparte: " + splitline[1])
+			// fmt.Printf("nombreparte: " + splitline[1])
 			chunkPos, _ := strconv.Atoi(nombreparte[1])
+			fmt.Printf("Agregando la parte %d desde el nodo %s", chunkPos, nodo)
 			if nodo == "dist141" {
 				propNodo1 = append(propNodo1, int32(chunkPos))
 			} else if nodo == "dist142" {
