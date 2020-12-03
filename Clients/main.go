@@ -47,11 +47,9 @@ func uploadLibro() bool {
 		opcion = strings.TrimSuffix(opcion, "\r")
 		if opcion == "1" {
 			response, err = link.UploadFile(ctx)
-			// fmt.Println("UNO")
 			exito = 1
 		} else if opcion == "2" {
 			response, err = link.DistUploadFile(ctx)
-			fmt.Println("DOS")
 			exito = 1
 		} else {
 			fmt.Println("Ingrese opcion una opción válida: ")
@@ -84,7 +82,7 @@ func uploadLibro() bool {
 	var file string
 	for cantidadPartes == 0 {
 		fmt.Printf("Ingrese nombre del archivo: ")
-		file, _ := reader.ReadString('\n')
+		file, _ = reader.ReadString('\n')
 		file = strings.TrimSuffix(file, "\n")
 		file = strings.TrimSuffix(file, "\r")
 
