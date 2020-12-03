@@ -157,6 +157,91 @@ func (x *Propuesta) GetNombreLibro() string {
 	return ""
 }
 
+type Message struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Status PropuestaStatus `protobuf:"varint,1,opt,name=status,proto3,enum=namenode.PropuestaStatus" json:"status,omitempty"`
+}
+
+func (x *Message) Reset() {
+	*x = Message{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_namenode_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Message) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Message) ProtoMessage() {}
+
+func (x *Message) ProtoReflect() protoreflect.Message {
+	mi := &file_namenode_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Message.ProtoReflect.Descriptor instead.
+func (*Message) Descriptor() ([]byte, []int) {
+	return file_namenode_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Message) GetStatus() PropuestaStatus {
+	if x != nil {
+		return x.Status
+	}
+	return PropuestaStatus_Rechazado
+}
+
+type Peticion struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *Peticion) Reset() {
+	*x = Peticion{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_namenode_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Peticion) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Peticion) ProtoMessage() {}
+
+func (x *Peticion) ProtoReflect() protoreflect.Message {
+	mi := &file_namenode_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Peticion.ProtoReflect.Descriptor instead.
+func (*Peticion) Descriptor() ([]byte, []int) {
+	return file_namenode_proto_rawDescGZIP(), []int{2}
+}
+
 var File_namenode_proto protoreflect.FileDescriptor
 
 var file_namenode_proto_rawDesc = []byte{
@@ -175,18 +260,31 @@ var file_namenode_proto_rawDesc = []byte{
 	0x65, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x53,
 	0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x20, 0x0a,
 	0x0b, 0x6e, 0x6f, 0x6d, 0x62, 0x72, 0x65, 0x4c, 0x69, 0x62, 0x72, 0x6f, 0x18, 0x06, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x0b, 0x6e, 0x6f, 0x6d, 0x62, 0x72, 0x65, 0x4c, 0x69, 0x62, 0x72, 0x6f, 0x2a,
-	0x2e, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x53, 0x74, 0x61, 0x74,
-	0x75, 0x73, 0x12, 0x0d, 0x0a, 0x09, 0x52, 0x65, 0x63, 0x68, 0x61, 0x7a, 0x61, 0x64, 0x6f, 0x10,
-	0x00, 0x12, 0x0c, 0x0a, 0x08, 0x41, 0x70, 0x72, 0x6f, 0x62, 0x61, 0x64, 0x6f, 0x10, 0x01, 0x32,
-	0x55, 0x0a, 0x0f, 0x4e, 0x61, 0x6d, 0x65, 0x4e, 0x6f, 0x64, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x6c,
-	0x65, 0x72, 0x12, 0x42, 0x0a, 0x10, 0x4d, 0x61, 0x6e, 0x65, 0x6a, 0x61, 0x72, 0x50, 0x72, 0x6f,
-	0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x12, 0x13, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x6f, 0x64,
-	0x65, 0x2e, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x1a, 0x13, 0x2e, 0x6e, 0x61,
-	0x6d, 0x65, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74, 0x61,
-	0x22, 0x00, 0x28, 0x01, 0x30, 0x01, 0x42, 0x13, 0x5a, 0x11, 0x4e, 0x61, 0x6d, 0x65, 0x4e, 0x6f,
-	0x64, 0x65, 0x2f, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x6f, 0x64, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x28, 0x09, 0x52, 0x0b, 0x6e, 0x6f, 0x6d, 0x62, 0x72, 0x65, 0x4c, 0x69, 0x62, 0x72, 0x6f, 0x22,
+	0x3c, 0x0a, 0x07, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x31, 0x0a, 0x06, 0x73, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e, 0x6e, 0x61, 0x6d,
+	0x65, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x0a, 0x0a,
+	0x08, 0x50, 0x65, 0x74, 0x69, 0x63, 0x69, 0x6f, 0x6e, 0x2a, 0x2e, 0x0a, 0x0f, 0x50, 0x72, 0x6f,
+	0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x0d, 0x0a, 0x09,
+	0x52, 0x65, 0x63, 0x68, 0x61, 0x7a, 0x61, 0x64, 0x6f, 0x10, 0x00, 0x12, 0x0c, 0x0a, 0x08, 0x41,
+	0x70, 0x72, 0x6f, 0x62, 0x61, 0x64, 0x6f, 0x10, 0x01, 0x32, 0xd9, 0x01, 0x0a, 0x0f, 0x4e, 0x61,
+	0x6d, 0x65, 0x4e, 0x6f, 0x64, 0x65, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x72, 0x12, 0x42, 0x0a,
+	0x10, 0x4d, 0x61, 0x6e, 0x65, 0x6a, 0x61, 0x72, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74,
+	0x61, 0x12, 0x13, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x50, 0x72, 0x6f,
+	0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x1a, 0x13, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x6f, 0x64,
+	0x65, 0x2e, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x22, 0x00, 0x28, 0x01, 0x30,
+	0x01, 0x12, 0x40, 0x0a, 0x10, 0x47, 0x75, 0x61, 0x72, 0x64, 0x61, 0x72, 0x50, 0x72, 0x6f, 0x70,
+	0x75, 0x65, 0x73, 0x74, 0x61, 0x12, 0x13, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x6f, 0x64, 0x65,
+	0x2e, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x1a, 0x11, 0x2e, 0x6e, 0x61, 0x6d,
+	0x65, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x00, 0x28,
+	0x01, 0x30, 0x01, 0x12, 0x40, 0x0a, 0x0f, 0x53, 0x6f, 0x6c, 0x69, 0x63, 0x69, 0x74, 0x61, 0x72,
+	0x4c, 0x69, 0x62, 0x72, 0x6f, 0x73, 0x12, 0x12, 0x2e, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x6f, 0x64,
+	0x65, 0x2e, 0x50, 0x65, 0x74, 0x69, 0x63, 0x69, 0x6f, 0x6e, 0x1a, 0x13, 0x2e, 0x6e, 0x61, 0x6d,
+	0x65, 0x6e, 0x6f, 0x64, 0x65, 0x2e, 0x50, 0x72, 0x6f, 0x70, 0x75, 0x65, 0x73, 0x74, 0x61, 0x22,
+	0x00, 0x28, 0x01, 0x30, 0x01, 0x42, 0x13, 0x5a, 0x11, 0x4e, 0x61, 0x6d, 0x65, 0x4e, 0x6f, 0x64,
+	0x65, 0x2f, 0x6e, 0x61, 0x6d, 0x65, 0x6e, 0x6f, 0x64, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -202,20 +300,27 @@ func file_namenode_proto_rawDescGZIP() []byte {
 }
 
 var file_namenode_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_namenode_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_namenode_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_namenode_proto_goTypes = []interface{}{
 	(PropuestaStatus)(0), // 0: namenode.PropuestaStatus
 	(*Propuesta)(nil),    // 1: namenode.Propuesta
+	(*Message)(nil),      // 2: namenode.Message
+	(*Peticion)(nil),     // 3: namenode.Peticion
 }
 var file_namenode_proto_depIdxs = []int32{
 	0, // 0: namenode.Propuesta.status:type_name -> namenode.PropuestaStatus
-	1, // 1: namenode.NameNodeHandler.ManejarPropuesta:input_type -> namenode.Propuesta
-	1, // 2: namenode.NameNodeHandler.ManejarPropuesta:output_type -> namenode.Propuesta
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	0, // 1: namenode.Message.status:type_name -> namenode.PropuestaStatus
+	1, // 2: namenode.NameNodeHandler.ManejarPropuesta:input_type -> namenode.Propuesta
+	1, // 3: namenode.NameNodeHandler.GuardarPropuesta:input_type -> namenode.Propuesta
+	3, // 4: namenode.NameNodeHandler.SolicitarLibros:input_type -> namenode.Peticion
+	1, // 5: namenode.NameNodeHandler.ManejarPropuesta:output_type -> namenode.Propuesta
+	2, // 6: namenode.NameNodeHandler.GuardarPropuesta:output_type -> namenode.Message
+	1, // 7: namenode.NameNodeHandler.SolicitarLibros:output_type -> namenode.Propuesta
+	5, // [5:8] is the sub-list for method output_type
+	2, // [2:5] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_namenode_proto_init() }
@@ -236,6 +341,30 @@ func file_namenode_proto_init() {
 				return nil
 			}
 		}
+		file_namenode_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Message); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_namenode_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Peticion); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -243,7 +372,7 @@ func file_namenode_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_namenode_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   1,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -271,6 +400,8 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type NameNodeHandlerClient interface {
 	ManejarPropuesta(ctx context.Context, opts ...grpc.CallOption) (NameNodeHandler_ManejarPropuestaClient, error)
+	GuardarPropuesta(ctx context.Context, opts ...grpc.CallOption) (NameNodeHandler_GuardarPropuestaClient, error)
+	SolicitarLibros(ctx context.Context, opts ...grpc.CallOption) (NameNodeHandler_SolicitarLibrosClient, error)
 }
 
 type nameNodeHandlerClient struct {
@@ -312,9 +443,73 @@ func (x *nameNodeHandlerManejarPropuestaClient) Recv() (*Propuesta, error) {
 	return m, nil
 }
 
+func (c *nameNodeHandlerClient) GuardarPropuesta(ctx context.Context, opts ...grpc.CallOption) (NameNodeHandler_GuardarPropuestaClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_NameNodeHandler_serviceDesc.Streams[1], "/namenode.NameNodeHandler/GuardarPropuesta", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &nameNodeHandlerGuardarPropuestaClient{stream}
+	return x, nil
+}
+
+type NameNodeHandler_GuardarPropuestaClient interface {
+	Send(*Propuesta) error
+	Recv() (*Message, error)
+	grpc.ClientStream
+}
+
+type nameNodeHandlerGuardarPropuestaClient struct {
+	grpc.ClientStream
+}
+
+func (x *nameNodeHandlerGuardarPropuestaClient) Send(m *Propuesta) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *nameNodeHandlerGuardarPropuestaClient) Recv() (*Message, error) {
+	m := new(Message)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *nameNodeHandlerClient) SolicitarLibros(ctx context.Context, opts ...grpc.CallOption) (NameNodeHandler_SolicitarLibrosClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_NameNodeHandler_serviceDesc.Streams[2], "/namenode.NameNodeHandler/SolicitarLibros", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &nameNodeHandlerSolicitarLibrosClient{stream}
+	return x, nil
+}
+
+type NameNodeHandler_SolicitarLibrosClient interface {
+	Send(*Peticion) error
+	Recv() (*Propuesta, error)
+	grpc.ClientStream
+}
+
+type nameNodeHandlerSolicitarLibrosClient struct {
+	grpc.ClientStream
+}
+
+func (x *nameNodeHandlerSolicitarLibrosClient) Send(m *Peticion) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *nameNodeHandlerSolicitarLibrosClient) Recv() (*Propuesta, error) {
+	m := new(Propuesta)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // NameNodeHandlerServer is the server API for NameNodeHandler service.
 type NameNodeHandlerServer interface {
 	ManejarPropuesta(NameNodeHandler_ManejarPropuestaServer) error
+	GuardarPropuesta(NameNodeHandler_GuardarPropuestaServer) error
+	SolicitarLibros(NameNodeHandler_SolicitarLibrosServer) error
 }
 
 // UnimplementedNameNodeHandlerServer can be embedded to have forward compatible implementations.
@@ -323,6 +518,12 @@ type UnimplementedNameNodeHandlerServer struct {
 
 func (*UnimplementedNameNodeHandlerServer) ManejarPropuesta(NameNodeHandler_ManejarPropuestaServer) error {
 	return status.Errorf(codes.Unimplemented, "method ManejarPropuesta not implemented")
+}
+func (*UnimplementedNameNodeHandlerServer) GuardarPropuesta(NameNodeHandler_GuardarPropuestaServer) error {
+	return status.Errorf(codes.Unimplemented, "method GuardarPropuesta not implemented")
+}
+func (*UnimplementedNameNodeHandlerServer) SolicitarLibros(NameNodeHandler_SolicitarLibrosServer) error {
+	return status.Errorf(codes.Unimplemented, "method SolicitarLibros not implemented")
 }
 
 func RegisterNameNodeHandlerServer(s *grpc.Server, srv NameNodeHandlerServer) {
@@ -355,6 +556,58 @@ func (x *nameNodeHandlerManejarPropuestaServer) Recv() (*Propuesta, error) {
 	return m, nil
 }
 
+func _NameNodeHandler_GuardarPropuesta_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(NameNodeHandlerServer).GuardarPropuesta(&nameNodeHandlerGuardarPropuestaServer{stream})
+}
+
+type NameNodeHandler_GuardarPropuestaServer interface {
+	Send(*Message) error
+	Recv() (*Propuesta, error)
+	grpc.ServerStream
+}
+
+type nameNodeHandlerGuardarPropuestaServer struct {
+	grpc.ServerStream
+}
+
+func (x *nameNodeHandlerGuardarPropuestaServer) Send(m *Message) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *nameNodeHandlerGuardarPropuestaServer) Recv() (*Propuesta, error) {
+	m := new(Propuesta)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _NameNodeHandler_SolicitarLibros_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(NameNodeHandlerServer).SolicitarLibros(&nameNodeHandlerSolicitarLibrosServer{stream})
+}
+
+type NameNodeHandler_SolicitarLibrosServer interface {
+	Send(*Propuesta) error
+	Recv() (*Peticion, error)
+	grpc.ServerStream
+}
+
+type nameNodeHandlerSolicitarLibrosServer struct {
+	grpc.ServerStream
+}
+
+func (x *nameNodeHandlerSolicitarLibrosServer) Send(m *Propuesta) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *nameNodeHandlerSolicitarLibrosServer) Recv() (*Peticion, error) {
+	m := new(Peticion)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _NameNodeHandler_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "namenode.NameNodeHandler",
 	HandlerType: (*NameNodeHandlerServer)(nil),
@@ -363,6 +616,18 @@ var _NameNodeHandler_serviceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ManejarPropuesta",
 			Handler:       _NameNodeHandler_ManejarPropuesta_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "GuardarPropuesta",
+			Handler:       _NameNodeHandler_GuardarPropuesta_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "SolicitarLibros",
+			Handler:       _NameNodeHandler_SolicitarLibros_Handler,
 			ServerStreams: true,
 			ClientStreams: true,
 		},

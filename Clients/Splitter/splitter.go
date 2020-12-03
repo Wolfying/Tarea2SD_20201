@@ -1,7 +1,6 @@
 package splitter
 
 import (
-	"bufio"
 	"fmt"
 	"io/ioutil"
 	"math"
@@ -23,7 +22,7 @@ import (
 // }
 
 // Combiner ... asda
-func Combiner(name string, totalPartsNum uint64) {
+func Combiner(name string, totalPartsNum uint64, libroarray [][]byte) {
 
 	// just for fun, let's recombine back the chunked files in a new file
 
@@ -53,37 +52,14 @@ func Combiner(name string, totalPartsNum uint64) {
 
 	for j := uint64(0); j < totalPartsNum; j++ {
 
-		//read a chunk
-		currentChunkFileName := name + "_" + strconv.FormatUint(j, 10)
-
-		newFileChunk, err := os.Open(currentChunkFileName)
-
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-
-		defer newFileChunk.Close()
-
-		chunkInfo, err := newFileChunk.Stat()
-
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
-
 		// calculate the bytes size of each chunk
 		// we are not going to rely on previous data and constant
-
-		var chunkSize int64 = chunkInfo.Size()
-		chunkBufferBytes := make([]byte, chunkSize)
+		chunkBufferBytes := libroarray[j]
+		var chunkSize int64 = int64(len(chunkBufferBytes))
+		// chunkBufferBytes := make([]byte, chunkSize)
 
 		fmt.Println("Agregando en posicion : [", writePosition, "] bytes")
 		writePosition = writePosition + chunkSize
-
-		// read into chunkBufferBytes
-		reader := bufio.NewReader(newFileChunk)
-		_, err = reader.Read(chunkBufferBytes)
 
 		if err != nil {
 			fmt.Println(err)
@@ -127,7 +103,8 @@ func Splitter(name string) uint64 {
 
 	if err != nil {
 		fmt.Println(err)
-		os.Exit(1)
+		// os.Exit(1)
+		return 0
 	}
 
 	defer file.Close()

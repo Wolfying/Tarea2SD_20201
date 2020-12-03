@@ -6,6 +6,7 @@ Integrantes:
 -   Sebastián Muñoz
     ROL: 201473503-0
 
+Programa SOLO recibe archivos sin espacios.
 
 Casos nodo no disponible:
     -Para todas las maquinas, existe un 10% de probabilidad de no estar disponible

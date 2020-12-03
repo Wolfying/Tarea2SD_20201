@@ -4,6 +4,8 @@ option go_package = "NameNode/namenode";
 
 service NameNodeHandler {
     rpc ManejarPropuesta (stream Propuesta) returns (stream Propuesta) {}
+    rpc GuardarPropuesta (stream Propuesta) returns (stream Message) {}
+    rpc SolicitarLibros (stream Peticion) returns (stream Propuesta) {}
 }
 
 enum PropuestaStatus {
@@ -18,6 +20,13 @@ message Propuesta{
     int32 cantidadPartes = 4;
     PropuestaStatus status = 5;
     string nombreLibro = 6;
+}
+
+message Message{
+    PropuestaStatus status = 1;
+}
+
+message Peticion{
 }
 
 

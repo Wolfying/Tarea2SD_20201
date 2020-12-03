@@ -5,11 +5,10 @@ option go_package = "Datanode/datanode";
 service DataNodeHandler {
     rpc UploadBook (stream chunk) returns (stream response) {}
     rpc UploadFile (stream chunk) returns (stream response) {}
+    rpc DistUploadFile (stream chunk) returns (stream response) {}
     rpc DownloadFile (stream fileInfo) returns (stream chunkResponse) {}
     rpc Ping (stream ping) returns (stream ping) {}
 }
-
-
 
 enum StatusCode {
     Success = 0;
