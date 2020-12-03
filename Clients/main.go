@@ -111,7 +111,7 @@ func uploadLibro() bool {
 			log.Fatalf("Failed to send a note: %v", err)
 		}
 
-		time.Sleep(1 * time.Second)
+		// time.Sleep(1 * time.Second)
 
 	}
 
@@ -166,9 +166,9 @@ func retrieveChunkList(parte int64, libro string, datanodeip string) []byte {
 	if err := response.Send(&mensaje); err != nil {
 		log.Fatalf("Failed to send a note: %v", err)
 	}
-
-	infoparte := <-waitc
 	response.CloseSend()
+	infoparte := <-waitc
+
 	log.Println(infoparte.GetContent())
 	return infoparte.Content
 }
