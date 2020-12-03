@@ -169,7 +169,8 @@ func retrieveChunkList(parte int64, libro string, datanodeip string) []byte {
 
 	response.CloseSend()
 	infoparte := <-waitc
-	return infoparte.GetContent()
+	log.Println(infoparte.Content)
+	return infoparte.Content
 }
 
 func descagarLibro() {
