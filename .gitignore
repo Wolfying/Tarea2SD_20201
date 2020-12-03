@@ -4,10 +4,10 @@
 *.dll
 *.so
 *.dylib
-*.pdf
+/*/*.pdf
 *.pdf.zip
 *.zip
-*.pdf_*
+/*/*.pdf_*
 *.sum
 
 # Test binary, built with `go test -c`

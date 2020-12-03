@@ -21,18 +21,3 @@ runCliente:
 	go run Clients/main.go
 #··················································································································
 
-rn:
-	git pull
-	rm -f log.txt
-	protoc -I NameNode/namenode NameNode/namenode/namenode.proto --go_out=plugins=grpc:./
-	go run NameNode/namenodeserver.go
-
-rc:
-	git pull
-	cd Clients/
-	go run main.go
-
-rd:
-	git pull
-	protoc -I DataNode/datanode DataNode/datanode/datanode.proto --go_out=plugins=grpc:./
-	go run DataNode/datanodeserver.go
