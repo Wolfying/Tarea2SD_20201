@@ -295,7 +295,10 @@ func main() {
 		opcion = strings.TrimSuffix(opcion, "\n")
 		opcion = strings.TrimSuffix(opcion, "\r")
 		if opcion == "1" {
+			start := time.Now()
 			uploadLibro()
+			elapsed := time.Since(start)
+			log.Printf("La subida del archivo tardó %s", elapsed)
 			exito1 = 1
 		} else if opcion == "2" {
 			// Descargar
