@@ -140,13 +140,13 @@ func retrieveChunkList(parte int64, libro string, datanodeip string) []byte {
 		log.Printf("Conexion fallida: %s", err)
 	}
 
-	waitc := make(chan datanode.ChunkResponse)
+	waitc := make(chan *datanode.ChunkResponse)
 
 	go func() {
 		for {
 			in, err := response.Recv()
 			if err == io.EOF {
-				waitc <- *in
+				waitc <- in
 				close(waitc)
 				return
 			}
