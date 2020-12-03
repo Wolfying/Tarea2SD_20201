@@ -146,7 +146,6 @@ func retrieveChunkList(parte int64, libro string, datanodeip string) []byte {
 		for {
 			in, err := response.Recv()
 			if err == io.EOF {
-				waitc <- in
 				close(waitc)
 				return
 			}
@@ -154,6 +153,7 @@ func retrieveChunkList(parte int64, libro string, datanodeip string) []byte {
 			if err != nil {
 				log.Fatalf("Error al recibir la respuesta del estado del archivo: %v", err)
 			}
+			waitc <- in
 			log.Printf("El server retorna el siguiente mensaje: %v", in.Message)
 		}
 	}()
