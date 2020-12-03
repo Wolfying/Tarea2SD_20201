@@ -298,7 +298,7 @@ func main() {
 			exito1 = 1
 		} else if opcion == "2" {
 			// Descargar
-
+			descagarLibro()
 			exito1 = 1
 		} else {
 			fmt.Println("Ingrese opcion una opción válida: ")
