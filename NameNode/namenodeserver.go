@@ -68,14 +68,14 @@ func (snn *ServerNameNode) SolicitarLibros(incomestream namenode.NameNodeHandler
 		var propNodo1 []int32
 		var propNodo2 []int32
 		var propNodo3 []int32
-		for j := i + 1; j < i+inte; j++ {
+		for j := i + 1; j < i+inte+1; j++ {
 			lineapeqe := lines[j]
 			splitline := strings.Split(lineapeqe, " ")
 			nodo := splitline[1]
 			nombreparte := strings.Split(splitline[0], "_")
 			// fmt.Printf("nombreparte: " + splitline[1])
 			chunkPos, _ := strconv.Atoi(nombreparte[1])
-			fmt.Printf("Agregando la parte %d desde el nodo %s", chunkPos, nodo)
+			fmt.Printf("Agregando la parte %d desde el nodo %s \n", chunkPos, nodo)
 			if nodo == "dist141" {
 				propNodo1 = append(propNodo1, int32(chunkPos))
 			} else if nodo == "dist142" {
