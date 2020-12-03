@@ -31,7 +31,7 @@ func uploadLibro() bool {
 
 	link := datanode.NewDataNodeHandlerClient(conn)
 
-	ctx, err1 := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, err1 := context.WithTimeout(context.Background(), 100*time.Second)
 
 	// preguntar centralizado o distribuido
 	var response datanode.DataNodeHandler_UploadFileClient
