@@ -167,9 +167,9 @@ func retrieveChunkList(parte int64, libro string, datanodeip string) []byte {
 		log.Fatalf("Failed to send a note: %v", err)
 	}
 
-	response.CloseSend()
 	infoparte := <-waitc
-	log.Println(infoparte.Content)
+	response.CloseSend()
+	log.Println(infoparte.GetContent())
 	return infoparte.Content
 }
 
